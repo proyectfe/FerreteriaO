@@ -1,0 +1,171 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.0-dev
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 192.168.30.23
+-- Tiempo de generación: 22-06-2015 a las 23:35:08
+-- Versión del servidor: 5.5.40-0+wheezy1
+-- Versión de PHP: 5.6.9-0+deb8u1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `FERRETERIA`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `ID_categoria` int(11) NOT NULL DEFAULT '0',
+  `nombre_categoria` varchar(30) NOT NULL,
+  `descripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `ID_cliente` int(11) NOT NULL,
+  `Nombre_Empresa` varchar(40) NOT NULL,
+  `Nombre_Contacto` varchar(40) NOT NULL,
+  `Lista_Contacto` varchar(40) NOT NULL,
+  `Direccion` varchar(30) NOT NULL,
+  `Ciudad` varchar(30) NOT NULL,
+  `Region` varchar(30) NOT NULL,
+  `Pais` varchar(20) NOT NULL,
+  `Codigo_Postal` int(11) NOT NULL,
+  `Telefono` int(11) NOT NULL,
+  `Email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_orden`
+--
+
+CREATE TABLE IF NOT EXISTS `detalle_orden` (
+  `ID_orden` int(11) NOT NULL,
+  `ID_producto` int(11) NOT NULL,
+  `Precio_unitario` int(11) NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Descuento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orden`
+--
+
+CREATE TABLE IF NOT EXISTS `orden` (
+  `ID_Orden` int(11) NOT NULL,
+  `ID_Cliente` int(11) NOT NULL,
+  `ID_Empleado` int(11) NOT NULL,
+  `Fecha_Orden` date NOT NULL,
+  `Fecha_Entrega` date NOT NULL,
+  `Fecha_Envio` date NOT NULL,
+  `Flete` varchar(30) NOT NULL,
+  `Enviado_Por` varchar(30) NOT NULL,
+  `Nombre_Empresa_Recep` varchar(40) NOT NULL,
+  `Direccion_Emp_Recep` varchar(30) NOT NULL,
+  `Ciudad_Emp_Recep` varchar(30) NOT NULL,
+  `Region_Emp_Recep` varchar(30) NOT NULL,
+  `CodigoPost_Emp_Recep` int(11) NOT NULL,
+  `Pais_Emp_Recep` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE IF NOT EXISTS `producto` (
+  `ID_producto` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `ID_categoria` int(11) NOT NULL,
+  `ID_proveerdor` int(11) NOT NULL,
+  `Cantidad_por_Unidad` int(11) NOT NULL,
+  `Precio_unitario` int(11) NOT NULL,
+  `Stock` int(11) NOT NULL,
+  `Descontinuado` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Proveedor`
+--
+
+CREATE TABLE IF NOT EXISTS `Proveedor` (
+  `ID_proveedor` int(11) NOT NULL,
+  `Nombre_Proveedor` varchar(30) NOT NULL,
+  `Nombre_Contacto` varchar(30) NOT NULL,
+  `Lista_Contactos` varchar(50) NOT NULL,
+  `Direccion` varchar(40) NOT NULL,
+  `Ciudad` varchar(40) NOT NULL,
+  `Region` varchar(40) NOT NULL,
+  `Pais` varchar(30) NOT NULL,
+  `Codigo_Postal` int(11) NOT NULL,
+  `Telefono` int(11) NOT NULL,
+  `Pagina_Web` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`ID_categoria`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`ID_cliente`);
+
+--
+-- Indices de la tabla `detalle_orden`
+--
+ALTER TABLE `detalle_orden`
+  ADD PRIMARY KEY (`ID_orden`);
+
+--
+-- Indices de la tabla `orden`
+--
+ALTER TABLE `orden`
+  ADD PRIMARY KEY (`ID_Orden`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`ID_producto`);
+
+--
+-- Indices de la tabla `Proveedor`
+--
+ALTER TABLE `Proveedor`
+  ADD PRIMARY KEY (`ID_proveedor`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
